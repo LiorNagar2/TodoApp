@@ -1,0 +1,30 @@
+{
+  "name": "todoapp",
+  "version": "1.0.0",
+  "description": "Bootstrap 4 Todo List",
+  "main": "index.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "bootstrap": "^4.4.1",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiorNagar2/TodoApp.git"
+  },
+  "author": "Lior Nagar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiorNagar2/TodoApp/issues"
+  },
+  "homepage": "https://github.com/LiorNagar2/TodoApp#readme"
+}
