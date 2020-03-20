@@ -11,13 +11,14 @@ if (isset($_POST["action"]) && !empty($_POST["action"])) {
         case "create_todo":
             $output = $todo->create_todo();
             break;
-        case "update_todo":
-            $output = $todo->update_todo();
-            break;
         case "delete_todo":
             $output = $todo->delete_todo();
-        case "sort_todos":
-            $output = $todo->sort_todos();
+            break;
+        case "filter_todos":
+            $output = $todo->filter_todos();
+            break;
+        case "update_todo_status":
+            $output = $todo->update_todo_status();
             break;
     }
 

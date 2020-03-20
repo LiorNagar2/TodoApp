@@ -60,6 +60,10 @@ if (isset($_POST['new_category'])) {
                                     <button type="submit" class="btn btn-primary" type="button">ADD TODO</button>
                                 </div>
                             </form>
+                            <?php /*if(isset($_GET['edit'])){
+                                include_once 'includes/views/todo-edit-form.php';
+                            } */?>
+
                             <h3>Todos</h3>
 
                             <div class="row justify-content-between">
@@ -77,7 +81,7 @@ if (isset($_POST['new_category'])) {
                                 <div class="col-md-3">
                                     <label for="SortCat">Filter</label>
                                     <select class="form-control form-control-sm" id="CatFilter">
-                                        <option>-- Select category --</option>
+                                        <option value="0">-- Select category --</option>
                                         <?php foreach ($categories as $category): ?>
                                             <option value="<?= $category['id']; ?>"><?= $category['category_name']; ?></option>
                                         <?php endforeach; ?>
@@ -103,25 +107,7 @@ if (isset($_POST['new_category'])) {
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="EditTodoForm">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Title</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                                           aria-describedby="emailHelp" placeholder="Enter email">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Category</label>
-                                                    <input type="password" class="form-control"
-                                                           id="exampleInputPassword1" value="Password">
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input"
-                                                           id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">Check me
-                                                        out</label>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </form>
+                                            <?php include 'includes/views/todo-edit-form.php'; ?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">

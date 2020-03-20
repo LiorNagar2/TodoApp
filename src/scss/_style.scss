@@ -35,3 +35,10 @@ body {
     }
   }
 }
+
+.todos-list .list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: transparent;
+  border-color: #007bff;
+}

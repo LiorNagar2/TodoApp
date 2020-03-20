@@ -10,12 +10,17 @@ Class Todo
         $this->db = new DB();
     }
 
-    public function get_todos($order_by = 'created_at', $order = 'DESC')
+    public function get_todos($order_by = 'created_at', $order = 'DESC', $cat_id = false)
     {
+        $where = '';
+        if ($cat_id) {
+            $where = " WHERE tc.id={$cat_id} ";
+        }
         $query = "
             SELECT t.*, tc.category_name 
             FROM todos t
-                LEFT JOIN todos_category tc ON t.category_id = tc.id
+                LEFT JOIN todos_category tc ON t.category_id = tc.id 
+                {$where}
             ORDER BY t.{$order_by} {$order};
         ";
 
@@ -90,9 +95,10 @@ Class Todo
     public function delete_todo()
     {
         $delete = $this->db->query("DELETE FROM todos WHERE id=?", $_POST['id']);
-        return array(
-            'status' => 200,
+        $response = array(
+            'status' => 200
         );
+        return $response;
     }
 
     public function create_category($cat_name)
@@ -102,17 +108,39 @@ Class Todo
         header('Location:' . $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']);
     }
 
-    public function sort_todos()
+    public function filter_todos()
     {
-        $order_by = $_POST['sort_by'];
-        $todos = $this->get_todos($order_by);
-        $todo_html = '';
-        foreach ($todos as $todo) {
-            $todo_html .= $this->get_todo_html($todo);
+        if (isset($_POST['sort_by'])) {
+            $order_by = $_POST['sort_by'];
+            $cat_id = $_POST['category_id'];
+            $order = 'DESC';
+
+            if ($order_by == 'title') {
+                $order = 'ASC';
+            }
+            $todos = $this->get_todos($order_by, $order, $cat_id);
+
+            $todo_html = '';
+            foreach ($todos as $todo) {
+                $todo_html .= $this->get_todo_html($todo);
+            }
+            return array(
+                'status' => 200,
+                'todos_html' => $todo_html,
+            );
         }
+
+    }
+
+    function update_todo_status()
+    {
+        $id = $_POST['id'];
+        $status = $_POST['status'];
+        $update = $this->db->query("UPDATE todos SET status={$status} WHERE id={$id}");
         return array(
             'status' => 200,
-            'todos_html' => $todo_html,
+            'id' => $id,
+            'todo_status' => $status,
         );
     }
 }

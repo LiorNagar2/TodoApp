@@ -13584,3 +13584,9 @@ body {
     margin: 0 5px; }
   .list-inline-separated li:last-child:after {
     content: ''; }
+
+.todos-list .list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: transparent;
+  border-color: #007bff; }

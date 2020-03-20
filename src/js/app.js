@@ -23,7 +23,7 @@
                     category_id: CatId,
                 },
                 success: function (data) {
-                    console.log(data);
+                    //console.log(data);
                     if (data.status == '200') {
                         // append new todo item
                         $('#TodoList').prepend(
@@ -43,6 +43,7 @@
 
     // Delete Todo
     $(document).on('click', '.delete-todo-btn', function (e) {
+        e.preventDefault();
         var todoItem = $(this).closest('.list-group-item');
         var todoId = todoItem.data('todo-id');
         $.ajax({
@@ -54,6 +55,7 @@
                 id: todoId,
             },
             success: function (data) {
+                console.log(data);
                 if (data.status == '500') {
                     alert('Error');
                 } else {
@@ -65,28 +67,80 @@
         });
     });
 
-
-    $('#Sort').on('change', function () {
-        var sortBy = this.value;
+    // filter todos
+    $('#Sort, #CatFilter').on('change', function () {
+        var sortBy = $('#Sort').val();
+        var CatId = $('#CatFilter').val();
         $.ajax({
             type: "POST",
             dataType: 'JSON',
             url: "includes/ajax.php",
             data: {
-                action: 'sort_todos',
+                action: 'filter_todos',
                 sort_by: sortBy,
+                category_id: CatId,
             },
             success: function (data) {
                 if (data.status == '500') {
                     alert('Error');
                 } else {
-                    console.log(data.todos_html);
                     $('#TodoList').html(data.todos_html);
                 }
             }
         });
 
     });
+
+    // Check todo
+    $(document).on('click', '.check-todo-btn', function (e) {
+        var todoItem = $(this).closest('.list-group-item');
+        var todoId = todoItem.data('todo-id');
+        var newsStatus = todoItem.hasClass('todo-done') ? 1 : 0;
+
+        $.ajax({
+            type: "POST",
+            dataType: 'JSON',
+            url: "includes/ajax.php",
+            data: {
+                action: 'update_todo_status',
+                id: todoId,
+                status: newsStatus
+            },
+            success: function (data) {
+                if (!data) {
+                    alert('Error');
+                } else {
+                    if(newsStatus == 1){
+                        todoItem.removeClass('todo-done list-group-item-danger');
+                    }else{
+                        todoItem.addClass('todo-done list-group-item-danger');
+                    }
+                }
+            }
+        });
+    });
+
+
+    /*$(document).on('click', '.edit-todo-btn', function (e) {
+        var todoItem = $(this).closest('.list-group-item');
+        var todoId = todoItem.data('todo-id');
+        $.ajax({
+            type: "POST",
+            dataType: 'JSON',
+            url: "includes/ajax.php",
+            data: {
+                action: 'get_todo_form',
+                id: todoId,
+            },
+            success: function (data) {
+                if (!data.id) {
+                    alert('Error');
+                } else {
+                    console.log(data)
+                }
+            }
+        });
+    });*/
 
 
 })(jQuery);
