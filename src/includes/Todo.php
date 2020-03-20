@@ -143,4 +143,12 @@ Class Todo
             'todo_status' => $status,
         );
     }
+
+    function delete_category()
+    {
+        $delete = $this->db->query("DELETE FROM todos_category WHERE id=?", $_POST['cat_id']);
+        return array(
+            'status' => 200
+        );
+    }
 }

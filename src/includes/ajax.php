@@ -20,6 +20,9 @@ if (isset($_POST["action"]) && !empty($_POST["action"])) {
         case "update_todo_status":
             $output = $todo->update_todo_status();
             break;
+        case "delete_category":
+            $output = $todo->delete_category();
+            break;
     }
 
     if (is_array($output)) {

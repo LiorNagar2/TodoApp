@@ -62,7 +62,7 @@ if (isset($_POST['new_category'])) {
                             </form>
                             <?php /*if(isset($_GET['edit'])){
                                 include_once 'includes/views/todo-edit-form.php';
-                            } */?>
+                            } */ ?>
 
                             <h3>Todos</h3>
 
@@ -138,8 +138,9 @@ if (isset($_POST['new_category'])) {
                                     <li class="list-group-item d-flex justify-content-between"
                                         data-cat-id="<?= $category['id']; ?>">
                                         <p class="p-0 m-0 flex-grow-1"><?php echo $category['category_name']; ?></p>
-                                        <div class="btn-group" role="group">
-                                            <span class="badge badge-primary badge-pill rounded-circle"><?php echo $category['todos_count']; ?></span>
+                                        <div class="btn-group align-items-center" role="group">
+                                            <span class="badge badge-primary badge-pill "><?php echo $category['todos_count']; ?></span>
+                                            <a class="btn text-danger delete-cat-btn"><i class="fa fa-remove"></i></a>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>

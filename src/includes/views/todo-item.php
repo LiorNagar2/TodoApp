@@ -15,11 +15,6 @@
                 <a class="btn btn-sm btn-success check-todo-btn">
                     <i class="fa fa-check"></i>
                 </a>
-                <a class="btn btn-sm btn-warning edit-todo-btn d-none"
-                   data-toggle="modal"
-                   data-target="#EditTodoModal">
-                    <i class="fa fa-edit"></i>
-                </a>
                 <a class="btn btn-sm btn-danger delete-todo-btn">
                     <i class="fa fa-remove"></i>
                 </a>
